@@ -21,6 +21,7 @@ public class InscriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
+        setTitle("Inscription");
 
         //Components
         Button signUp_button = (Button)findViewById(R.id.button_register);
