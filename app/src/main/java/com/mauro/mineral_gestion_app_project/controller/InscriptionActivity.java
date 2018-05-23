@@ -1,4 +1,4 @@
-package com.mauro.mineral_gestion_app_project;
+package com.mauro.mineral_gestion_app_project.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.mauro.mineral_gestion_app_project.R;
 
 public class InscriptionActivity extends AppCompatActivity {
 
