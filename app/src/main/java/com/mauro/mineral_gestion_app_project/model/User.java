@@ -6,6 +6,7 @@ package com.mauro.mineral_gestion_app_project.model;
  */
 
 public class User {
+
     private int user_id;
     private String user_name;
     private String user_surname;

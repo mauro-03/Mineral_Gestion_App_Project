@@ -6,6 +6,7 @@ package com.mauro.mineral_gestion_app_project.model;
  */
 
 public class Chemical {
+
     private int chemical_id;
     private String chemical_formula;
     private int chemical_class;
