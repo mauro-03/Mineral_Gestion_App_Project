@@ -53,7 +53,7 @@ public class InscriptionActivity extends AppCompatActivity {
                 String phone = phone_editText.getText().toString();
 
 
-                //user.setUser_name(name);      (A CHANGER SI NECESSAIRE !!)
+                //user.setUser_name(name);                        //(A CHANGER SI NECESSAIRE !!)
                 //user.setUser_surname(surname);
                 //user.setUser_email(email);
                 //user.setUser_phone(phone);
