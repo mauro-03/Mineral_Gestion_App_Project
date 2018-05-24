@@ -8,6 +8,8 @@ package com.mauro.mineral_gestion_app_project.model;
 public class User {
 
     private int user_id;
+    private String user_username;
+    private String user_pinCode;
     private String user_name;
     private String user_surname;
     private String user_email;
@@ -15,7 +17,11 @@ public class User {
 
     public User(){}
 
-    public User(String user_name, String user_surname, String user_email, String user_phone) {
+    public User(int user_id, String user_username, String user_pinCode,
+                String user_name, String user_surname, String user_email, String user_phone) {
+        this.user_id = user_id;
+        this.user_username = user_username;
+        this.user_pinCode = user_pinCode;
         this.user_name = user_name;
         this.user_surname = user_surname;
         this.user_email = user_email;
@@ -29,6 +35,14 @@ public class User {
     public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
+
+    public String getUser_username() { return user_username; }
+
+    public void setUser_username(String user_username) { this.user_username = user_username; }
+
+    public String getUser_pinCode() { return user_pinCode; }
+
+    public void setUser_pinCode(String user_pinCode) { this.user_pinCode = user_pinCode; }
 
     public String getUser_name() {
         return user_name;
