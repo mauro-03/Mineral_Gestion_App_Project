@@ -12,7 +12,7 @@ import com.mauro.mineral_gestion_app_project.R;
 import com.mauro.mineral_gestion_app_project.model.User;
 import com.mauro.mineral_gestion_app_project.model.User_DAO;
 
-public class InscriptionActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     EditText name_editText;
     EditText surname_editText;
@@ -28,7 +28,7 @@ public class InscriptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscription);
+        setContentView(R.layout.activity_register);
         setTitle("Inscription");
 
         //Components
@@ -62,7 +62,7 @@ public class InscriptionActivity extends AppCompatActivity {
                 //mUser_dao.update(user.getUser_id(), user);
                 //mUser_dao.close();
 
-                //connexionActivity = new Intent(InscriptionActivity.this, ConnexionActivity.class);
+                //connexionActivity = new Intent(RegisterActivity.this, ConnexionActivity.class);
                 //startActivity(connexionActivity);
 
             }

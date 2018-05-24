@@ -4,9 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.mauro.mineral_gestion_app_project.controller.InscriptionActivity;
-import com.mauro.mineral_gestion_app_project.controller.MainActivity;
-
 import java.util.ArrayList;
 
 /**
