@@ -72,6 +72,7 @@ public class User_DAO extends DAO<User> {
             c.close();
             return null;
         }
+        c.moveToFirst();
         User user = new User();
         user.setUser_id(c.getInt(NUM_COL_ID));
         user.setUser_name(c.getString(NUM_COL_NAME));
@@ -91,7 +92,8 @@ public class User_DAO extends DAO<User> {
             return null;
         }
         ArrayList<User> list_user = new ArrayList<>();
-        while(c.moveToNext()){
+        c.moveToFirst();
+        do{
             User user = new User();
             user.setUser_id(c.getInt(NUM_COL_ID));
             user.setUser_name(c.getString(NUM_COL_NAME));
@@ -99,7 +101,7 @@ public class User_DAO extends DAO<User> {
             user.setUser_email(c.getString(NUM_COL_EMAIL));
             user.setUser_phone(c.getString(NUM_COL_PHONE));
             list_user.add(user);
-        }
+        }while(c.moveToNext());
         return list_user;
     }
 }
