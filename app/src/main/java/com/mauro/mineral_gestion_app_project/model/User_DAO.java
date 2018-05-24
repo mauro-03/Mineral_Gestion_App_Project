@@ -1,4 +1,4 @@
-package com.mauro.mineral_gestion_app_project;
+package com.mauro.mineral_gestion_app_project.model;
 
 import android.content.ContentValues;
 import android.database.Cursor;
