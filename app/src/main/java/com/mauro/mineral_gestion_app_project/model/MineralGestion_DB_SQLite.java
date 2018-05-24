@@ -17,14 +17,17 @@ public class MineralGestion_DB_SQLite extends SQLiteOpenHelper{
     //Creation of the USER table
     private static final String table_user = "table_user";
     private static final String COL_ID_user = "ID";
+    private static final String COL_USERNAME_user = "USERNAME";
+    private static final String COL_PINCODE_user = "PINCODE";
     private static final String COL_NAME_user = "NAME";
     private static final String COL_SURNAME_user = "SURNAME";
     private static final String COL_EMAIL_user = "EMAIL";
     private static final String COL_PHONE_user = "PHONE";
 
     private static final String CREATE_TABLE_user = "CREATE TABLE " + table_user + " (" +
-            COL_ID_user + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_NAME_user + " TEXT NOT NULL," +
-            COL_SURNAME_user + "TEXT NOT NULL, " + COL_EMAIL_user + " TEXT NOT NULL ," +
+            COL_ID_user + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_USERNAME_user + " TEXT NOT NULL,"
+            + COL_PINCODE_user + " TEXT NOT NULL,"  + COL_NAME_user + " TEXT NOT NULL,"
+            + COL_SURNAME_user + "TEXT NOT NULL, " + COL_EMAIL_user + " TEXT NOT NULL ," +
             COL_PHONE_user + " TEXT NOT NULL );";
 
     //Creation of the LOCATION table
