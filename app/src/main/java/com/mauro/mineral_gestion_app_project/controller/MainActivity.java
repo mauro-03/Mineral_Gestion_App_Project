@@ -10,6 +10,8 @@ import android.widget.EditText;
 import com.mauro.mineral_gestion_app_project.R;
 import com.mauro.mineral_gestion_app_project.model.User_DAO;
 
+// class permettant de se connecter à l'application
+
 public class MainActivity extends AppCompatActivity {
 
     User_DAO mUser_dao;
