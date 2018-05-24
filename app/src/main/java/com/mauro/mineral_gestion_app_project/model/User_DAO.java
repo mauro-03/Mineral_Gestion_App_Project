@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.mauro.mineral_gestion_app_project.controller.InscriptionActivity;
+import com.mauro.mineral_gestion_app_project.controller.MainActivity;
 
 import java.util.ArrayList;
 
@@ -29,9 +30,6 @@ public class User_DAO extends DAO<User> {
     private static final String COL_PHONE = "PHONE";
     private static final int NUM_COL_PHONE = 4;
 
-    public User_DAO(InscriptionActivity inscriptionActivity) {
-        super();
-    }
 
     // Override methods that come from class DAO
     @Override

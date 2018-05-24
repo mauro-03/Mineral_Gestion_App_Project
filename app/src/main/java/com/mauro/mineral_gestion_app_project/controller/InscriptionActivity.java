@@ -39,7 +39,7 @@ public class InscriptionActivity extends AppCompatActivity {
         phone_editText = (EditText)findViewById(R.id.editText_phone);
         test = (TextView)findViewById(R.id.textView3);
 
-        mUser_dao = new User_DAO(this);
+        //mUser_dao = new User_DAO(this);
 
 
 
@@ -53,14 +53,14 @@ public class InscriptionActivity extends AppCompatActivity {
                 String phone = phone_editText.getText().toString();
 
 
-                user.setUser_name(name);
-                user.setUser_surname(surname);
-                user.setUser_email(email);
-                user.setUser_phone(phone);
+                //user.setUser_name(name);      (A CHANGER SI NECESSAIRE !!)
+                //user.setUser_surname(surname);
+                //user.setUser_email(email);
+                //user.setUser_phone(phone);
 
-                mUser_dao.openForWrite();
-                mUser_dao.update(user.getUser_id(), user);
-                mUser_dao.close();
+                //mUser_dao.openForWrite();
+                //mUser_dao.update(user.getUser_id(), user);
+                //mUser_dao.close();
 
                 //connexionActivity = new Intent(InscriptionActivity.this, ConnexionActivity.class);
                 //startActivity(connexionActivity);
