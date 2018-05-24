@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.mauro.mineral_gestion_app_project.controller.InscriptionActivity;
+
 import java.util.ArrayList;
 
 /**
@@ -27,7 +29,7 @@ public class User_DAO extends DAO<User> {
     private static final String COL_PHONE = "PHONE";
     private static final int NUM_COL_PHONE = 4;
 
-    public User_DAO() {
+    public User_DAO(InscriptionActivity inscriptionActivity) {
         super();
     }
 
