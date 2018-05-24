@@ -6,7 +6,7 @@ package com.mauro.mineral_gestion_app_project.model;
  */
 
 public class Location {
-    
+
     private int location_id;
     private String location_city;
     private String location_area;
