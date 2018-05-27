@@ -21,9 +21,8 @@ public class Location_DAO extends DAO<Location> {
     private static final String COL_COUNTRY = "COUNTRY";
     private static final int NUM_COL_COUNTRTY = 3;
 
+
     // Override methods that come from class DAO
-
-
     @Override
     public long insert(Location object) {
         ContentValues content = new ContentValues();
@@ -90,6 +89,7 @@ public class Location_DAO extends DAO<Location> {
             location.setLocation_Country(c.getString(NUM_COL_COUNTRTY));
             listLocation.add(location);
         }while(c.moveToNext());
+        c.close();
 
         return listLocation;
     }
