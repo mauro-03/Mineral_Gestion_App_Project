@@ -14,6 +14,8 @@ import com.mauro.mineral_gestion_app_project.model.User_DAO;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    EditText username_editText;
+    EditText pinCode_editText;
     EditText name_editText;
     EditText surname_editText;
     EditText email_editText;
@@ -33,37 +35,41 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Components
         Button signUp_button = (Button)findViewById(R.id.button_register);
+        username_editText = (EditText)findViewById(R.id.editText_username);
+        pinCode_editText = (EditText)findViewById(R.id.editText_pinCode);
         name_editText= (EditText)findViewById(R.id.editText_name);
         surname_editText = (EditText)findViewById(R.id.editText_surname);
         email_editText = (EditText)findViewById(R.id.editText_email);
         phone_editText = (EditText)findViewById(R.id.editText_phone);
         test = (TextView)findViewById(R.id.textView3);
 
-        //mUser_dao = new User_DAO(this);
-
+        mUser_dao = new User_DAO(this);
 
 
         signUp_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                String username = username_editText.getText().toString();
+                String pinCode = pinCode_editText.getText().toString();
                 String name = name_editText.getText().toString();
                 String surname = surname_editText.getText().toString();
                 String email = email_editText.getText().toString();
                 String phone = phone_editText.getText().toString();
 
+                user.setUser_username(username);
+                user.setUser_pinCode(pinCode);
+                user.setUser_name(name);                        //(A CHANGER SI NECESSAIRE !!)
+                user.setUser_surname(surname);
+                user.setUser_email(email);
+                user.setUser_phone(phone);
 
-                //user.setUser_name(name);                        //(A CHANGER SI NECESSAIRE !!)
-                //user.setUser_surname(surname);
-                //user.setUser_email(email);
-                //user.setUser_phone(phone);
+                mUser_dao.openForWrite();
+                mUser_dao.insert( user );
+                mUser_dao.close();
 
-                //mUser_dao.openForWrite();
-                //mUser_dao.update(user.getUser_id(), user);
-                //mUser_dao.close();
-
-                //connexionActivity = new Intent(RegisterActivity.this, ConnexionActivity.class);
-                //startActivity(connexionActivity);
+                connexionActivity = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(connexionActivity);
 
             }
         });
