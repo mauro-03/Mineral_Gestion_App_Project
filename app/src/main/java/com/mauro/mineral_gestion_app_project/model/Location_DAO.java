@@ -1,6 +1,7 @@
 package com.mauro.mineral_gestion_app_project.model;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -20,6 +21,10 @@ public class Location_DAO extends DAO<Location> {
     private static final int NUM_COL_AREA = 2;
     private static final String COL_COUNTRY = "COUNTRY";
     private static final int NUM_COL_COUNTRTY = 3;
+
+    public Location_DAO(Context context){
+        super(context);
+    }
 
 
     // Override methods that come from class DAO

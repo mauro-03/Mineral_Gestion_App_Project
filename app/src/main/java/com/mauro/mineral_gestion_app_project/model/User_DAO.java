@@ -1,6 +1,7 @@
 package com.mauro.mineral_gestion_app_project.model;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -30,6 +31,10 @@ public class User_DAO extends DAO<User> {
     private static final int NUM_COL_EMAIL = 5;
     private static final String COL_PHONE = "PHONE";
     private static final int NUM_COL_PHONE = 6;
+
+    public User_DAO(Context context){
+        super(context);
+    }
 
 
     // Override methods that come from class DAO
@@ -113,6 +118,8 @@ public class User_DAO extends DAO<User> {
             user.setUser_phone(c.getString(NUM_COL_PHONE));
             list_user.add(user);
         }while(c.moveToNext());
+        c.close();
+
         return list_user;
     }
 }

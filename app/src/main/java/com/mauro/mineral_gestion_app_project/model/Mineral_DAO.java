@@ -1,6 +1,7 @@
 package com.mauro.mineral_gestion_app_project.model;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -45,6 +46,10 @@ public class Mineral_DAO extends DAO<Mineral> {
     private static final int NUM_COL_FK_LOCATION = 15;
     private static final String COL_FK_chemical = "FK_CHEMICAL";
     private static final int NUM_COL_FK_CHEMICAL = 16;
+
+    public Mineral_DAO(Context context){
+        super(context);
+    }
 
 
     //Override methods that come from class DAO

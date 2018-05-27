@@ -1,6 +1,7 @@
 package com.mauro.mineral_gestion_app_project.model;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -19,6 +20,9 @@ public class Chemical_DAO extends DAO<Chemical>  {
     private static final String COL_CLASS = "CLASS";
     private static final int NUM_COL_CLASS = 2;
 
+    public Chemical_DAO(Context context){
+        super(context);
+    }
 
     // Override methods that come from class DAO
     @Override
