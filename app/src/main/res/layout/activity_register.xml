@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mauro.mineral_gestion_app_project.controller.RegisterActivity"
-    android:background="@drawable/mining"
     android:orientation="vertical">
 
 
@@ -17,7 +16,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:text="Welcome to your mineral gestion app!"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,10 +28,30 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:text="Complete your inscription please"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/editText_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:id="@+id/editText_pinCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Pin Code"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/editText_name"
@@ -100,15 +119,14 @@
         android:id="@+id/button_register"
         android:layout_width="149dp"
         android:layout_height="45dp"
+        android:layout_gravity="center"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:text="Sign up"
-        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_phone"
-        android:background="@drawable/borderdrawable"/>
+        app:layout_constraintTop_toBottomOf="@+id/editText_phone" />
 
     <TextView
         android:id="@+id/textView3"
