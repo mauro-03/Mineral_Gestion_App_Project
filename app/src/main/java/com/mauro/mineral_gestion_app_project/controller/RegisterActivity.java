@@ -1,5 +1,6 @@
 package com.mauro.mineral_gestion_app_project.controller;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import com.mauro.mineral_gestion_app_project.model.User_DAO;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    Button signUp_button;
     EditText username_editText;
     EditText pinCode_editText;
     EditText name_editText;
@@ -22,11 +24,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText phone_editText;
     TextView test;
 
-    User user;
-    User_DAO mUser_dao;
-
-    Intent connexionActivity;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
         setTitle("Inscription");
 
         //Components
-        Button signUp_button = (Button)findViewById(R.id.button_register);
+        signUp_button = (Button)findViewById(R.id.button_register);
         username_editText = (EditText)findViewById(R.id.editText_username);
         pinCode_editText = (EditText)findViewById(R.id.editText_pinCode);
         name_editText= (EditText)findViewById(R.id.editText_name);
@@ -42,9 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
         email_editText = (EditText)findViewById(R.id.editText_email);
         phone_editText = (EditText)findViewById(R.id.editText_phone);
         test = (TextView)findViewById(R.id.textView3);
-
-        mUser_dao = new User_DAO(this);
-
 
         signUp_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,18 +51,21 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = email_editText.getText().toString();
                 String phone = phone_editText.getText().toString();
 
+                User user = new User();
                 user.setUser_username(username);
                 user.setUser_pinCode(pinCode);
-                user.setUser_name(name);                        //(A CHANGER SI NECESSAIRE !!)
+                user.setUser_name(name);                        
                 user.setUser_surname(surname);
                 user.setUser_email(email);
                 user.setUser_phone(phone);
 
+                Context context = getApplicationContext();
+                User_DAO mUser_dao = new User_DAO(context);
                 mUser_dao.openForWrite();
                 mUser_dao.insert( user );
                 mUser_dao.close();
 
-                connexionActivity = new Intent(RegisterActivity.this, MainActivity.class);
+                 Intent connexionActivity = new Intent(RegisterActivity.this, MainActivity.class);
                 startActivity(connexionActivity);
 
             }

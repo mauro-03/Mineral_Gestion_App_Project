@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     User_DAO mUser_dao;
-    Intent registerActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 User user = mUser_dao.getObject(username);
 
                 if(code == user.getUser_pinCode()){
-                    // On cree l'intent pour passer a la HomeActivity ici !!!
-
+                    Intent homeActivity = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(homeActivity);
                 }
             }
         });
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerActivity = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent registerActivity = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(registerActivity);
             }
         });
