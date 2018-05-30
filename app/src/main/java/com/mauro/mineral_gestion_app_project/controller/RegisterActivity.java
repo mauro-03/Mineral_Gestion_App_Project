@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Context context = getApplicationContext();
                 User_DAO mUser_dao = new User_DAO(context);
                 mUser_dao.openForWrite();
-                mUser_dao.insert( user );
+                mUser_dao.insertUser( user );
                 mUser_dao.close();
 
                  Intent connexionActivity = new Intent(RegisterActivity.this, MainActivity.class);

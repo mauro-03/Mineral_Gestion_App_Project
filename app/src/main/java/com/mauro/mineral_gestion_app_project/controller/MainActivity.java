@@ -20,16 +20,21 @@ public class MainActivity extends AppCompatActivity {
 
     User_DAO mUser_dao;
 
+    Button connect_button;
+    Button register_button;
+    EditText usernameEntry;
+    EditText codeEntry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Login");
 
-        Button connect_button = (Button) findViewById(R.id.connect_button);
-        final Button register_button = (Button) findViewById(R.id.register_button);
-        final EditText usernameEntry = (EditText) findViewById(R.id.username);
-        final EditText codeEntry = (EditText) findViewById(R.id.code);
+        connect_button = (Button) findViewById(R.id.connect_button);
+        register_button = (Button) findViewById(R.id.register_button);
+        usernameEntry = (EditText) findViewById(R.id.username);
+        codeEntry = (EditText) findViewById(R.id.code);
 
         Context context = getApplicationContext();
         mUser_dao = new User_DAO(context);
@@ -41,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
                 String username = usernameEntry.getText().toString();
                 String code = codeEntry.getText().toString();
 
-                User user = mUser_dao.getObject(username);
+                //User user = mUser_dao.getObject(username);
 
-                if(code == user.getUser_pinCode()){
+                if(code.equals("0000") && username.equals("mau")){
                     Intent homeActivity = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(homeActivity);
                 }

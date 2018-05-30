@@ -13,13 +13,12 @@ import java.util.ArrayList;
 
 public class User_DAO  {
 
-    public static final String name = "Mineral_Gestion_DB";
+    public static final String name = "Mineral.db";
     public static final int version = 1;
 
     private SQLiteDatabase db;
     private MineralGestion_DB_SQLite mineral_gestion;
 
-    public User_DAO(){}
 
     public User_DAO(Context context){
         mineral_gestion = new MineralGestion_DB_SQLite(context, name, null, version);
@@ -58,7 +57,7 @@ public class User_DAO  {
 
     // Override methods that come from class DAO
 
-    public long insert(User object) {
+    public long insertUser(User object) {
         ContentValues content = new ContentValues();
         content.put(COL_USERNAME, object.getUser_username());
         content.put(COL_PINCODE, object.getUser_pinCode());
@@ -91,7 +90,7 @@ public class User_DAO  {
 
     public User getObject(String username) {
         Cursor c = db.query(table_user, new String[] {COL_ID, COL_USERNAME, COL_PINCODE,  COL_NAME,
-                        COL_SURNAME, COL_EMAIL, COL_PHONE}, COL_SURNAME + " LIKE \"" +
+                COL_SURNAME, COL_EMAIL, COL_PHONE}, COL_USERNAME + " LIKE \"" +
                 username + " \"", null, null, null, COL_NAME );
         return cursorToObject(c);
     }
@@ -118,7 +117,7 @@ public class User_DAO  {
 
     public ArrayList<User> getAllObject() {
         Cursor c = db.query(table_user, new String[] { COL_ID, COL_USERNAME, COL_PINCODE, COL_NAME,
-                COL_SURNAME, COL_EMAIL, COL_PHONE}, null, null, null,
+                        COL_SURNAME, COL_EMAIL, COL_PHONE}, null, null, null,
                 null, COL_ID );
         if (c.getCount() == 0){
             c.close();
