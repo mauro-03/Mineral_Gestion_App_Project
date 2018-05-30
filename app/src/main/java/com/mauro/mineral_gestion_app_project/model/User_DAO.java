@@ -11,10 +11,19 @@ import java.util.ArrayList;
  * Created by mauro on 11-05-18.
  */
 
-public class User_DAO extends DAO<User> {
+public class User_DAO  {
 
-    private SQLiteDatabase bdd;
+    public static final String name = "Mineral_Gestion_DB";
+    public static final int version = 1;
+
+    private SQLiteDatabase db;
     private MineralGestion_DB_SQLite mineral_gestion;
+
+    public User_DAO(){}
+
+    public User_DAO(Context context){
+        mineral_gestion = new MineralGestion_DB_SQLite(context, name, null, version);
+    }
 
     private static final String  table_user = "table_user";
     private static final String COL_ID = "ID";
@@ -32,13 +41,23 @@ public class User_DAO extends DAO<User> {
     private static final String COL_PHONE = "PHONE";
     private static final int NUM_COL_PHONE = 6;
 
-    public User_DAO(Context context){
-        super(context);
+    public void openForWrite() {
+        db = mineral_gestion.getWritableDatabase();
+    }
+
+    public void openForRead() {
+        db = mineral_gestion.getReadableDatabase();
+    }
+
+    public void close(){ db.close(); }
+
+    public SQLiteDatabase getBdd() {
+        return db;
     }
 
 
     // Override methods that come from class DAO
-    @Override
+
     public long insert(User object) {
         ContentValues content = new ContentValues();
         content.put(COL_USERNAME, object.getUser_username());
@@ -48,10 +67,10 @@ public class User_DAO extends DAO<User> {
         content.put(COL_EMAIL, object.getUser_email());
         content.put(COL_PHONE, object.getUser_phone());
 
-        return bdd.insert(table_user, null, content);
+        return db.insert(table_user, null, content);
     }
 
-    @Override
+
     public int update(int id, User object) {
         ContentValues content = new ContentValues();
         content.put(COL_USERNAME, object.getUser_username());
@@ -61,23 +80,23 @@ public class User_DAO extends DAO<User> {
         content.put(COL_EMAIL, object.getUser_email());
         content.put(COL_PHONE, object.getUser_phone());
 
-        return bdd.update(table_user, content, COL_ID + " = " + id, null );
+        return db.update(table_user, content, COL_ID + " = " + id, null );
     }
 
-    @Override
+
     public int remove(int id) {
-        return bdd.delete(table_user, COL_ID + " = " + id, null);
+        return db.delete(table_user, COL_ID + " = " + id, null);
     }
 
-    @Override
+
     public User getObject(String username) {
-        Cursor c = bdd.query(table_user, new String[] {COL_ID, COL_USERNAME, COL_PINCODE,  COL_NAME,
+        Cursor c = db.query(table_user, new String[] {COL_ID, COL_USERNAME, COL_PINCODE,  COL_NAME,
                         COL_SURNAME, COL_EMAIL, COL_PHONE}, COL_SURNAME + " LIKE \"" +
                 username + " \"", null, null, null, COL_NAME );
         return cursorToObject(c);
     }
 
-    @Override
+
     public User cursorToObject(Cursor c) {
         if (c.getCount() == 0) {
             c.close();
@@ -96,9 +115,9 @@ public class User_DAO extends DAO<User> {
         return user;
     }
 
-    @Override
+
     public ArrayList<User> getAllObject() {
-        Cursor c = bdd.query(table_user, new String[] { COL_ID, COL_USERNAME, COL_PINCODE, COL_NAME,
+        Cursor c = db.query(table_user, new String[] { COL_ID, COL_USERNAME, COL_PINCODE, COL_NAME,
                 COL_SURNAME, COL_EMAIL, COL_PHONE}, null, null, null,
                 null, COL_ID );
         if (c.getCount() == 0){

@@ -7,9 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-public class Mineral_DAO extends DAO<Mineral> {
+public class Mineral_DAO  {
+
+    public static final String name = "Mineral_Gestion_DB";
+    public static final int version = 1;
+
     private SQLiteDatabase db;
-    private MineralGestion_DB_SQLite mineralGestion_db;
+    private MineralGestion_DB_SQLite mineral_gestion;
+
+    public Mineral_DAO(){}
+
+    public Mineral_DAO(Context context){
+        mineral_gestion = new MineralGestion_DB_SQLite(context, name, null, version);
+    }
 
     private static final String table_mineral = "table_mineral";
     private static final String COL_ID = "ID";
@@ -47,13 +57,23 @@ public class Mineral_DAO extends DAO<Mineral> {
     private static final String COL_FK_chemical = "FK_CHEMICAL";
     private static final int NUM_COL_FK_CHEMICAL = 16;
 
-    public Mineral_DAO(Context context){
-        super(context);
+    public void openForWrite() {
+        db = mineral_gestion.getWritableDatabase();
+    }
+
+    public void openForRead() {
+        db = mineral_gestion.getReadableDatabase();
+    }
+
+    public void close(){ db.close(); }
+
+    public SQLiteDatabase getBdd() {
+        return db;
     }
 
 
     //Override methods that come from class DAO
-    @Override
+
     public long insert(Mineral object) {
         ContentValues content = new ContentValues();
         content.put(COL_NAME, object.getMineral_name());
@@ -76,7 +96,7 @@ public class Mineral_DAO extends DAO<Mineral> {
         return db.insert(table_mineral, null, content);
     }
 
-    @Override
+
     public int update(int id, Mineral object) {
         ContentValues content = new ContentValues();
         content.put(COL_NAME, object.getMineral_name());
@@ -99,12 +119,12 @@ public class Mineral_DAO extends DAO<Mineral> {
         return db.update(table_mineral, content, COL_ID + " = " + id, null );
     }
 
-    @Override
+
     public int remove(int id) {
         return db.delete(table_mineral, COL_ID + " = " + id, null);
     }
 
-    @Override
+
     public Mineral getObject(String name) {
         Cursor c = db.query(table_mineral, new String[] {COL_ID, COL_NAME, COL_SYNONYM,  COL_MINASS,
                 COL_SYSTCRIST, COL_COLOR, COL_GLOW, COL_ASPECT, COL_CLIVAGE, COL_HARDNESS, COL_DENSITY,
@@ -113,7 +133,7 @@ public class Mineral_DAO extends DAO<Mineral> {
         return cursorToObject(c);
     }
 
-    @Override
+
     public Mineral cursorToObject(Cursor c) {
         if (c.getCount() == 0) {
             c.close();
@@ -143,7 +163,7 @@ public class Mineral_DAO extends DAO<Mineral> {
         return mineral;
     }
 
-    @Override
+
     public ArrayList<Mineral> getAllObject() {
         Cursor c = db.query(table_mineral, new String[] {COL_ID, COL_NAME, COL_SYNONYM,  COL_MINASS,
                         COL_SYSTCRIST, COL_COLOR, COL_GLOW, COL_ASPECT, COL_CLIVAGE, COL_HARDNESS, COL_DENSITY,

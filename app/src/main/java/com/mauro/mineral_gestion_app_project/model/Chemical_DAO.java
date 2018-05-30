@@ -7,10 +7,20 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-public class Chemical_DAO extends DAO<Chemical>  {
+public class Chemical_DAO   {
+
+
+    public static final String name = "Mineral_Gestion_DB";
+    public static final int version = 1;
 
     private SQLiteDatabase db;
-    private MineralGestion_DB_SQLite mineralGestion_db;
+    private MineralGestion_DB_SQLite mineral_gestion;
+
+    public Chemical_DAO(){}
+
+    public Chemical_DAO(Context context){
+        mineral_gestion = new MineralGestion_DB_SQLite(context, name, null, version);
+    }
 
     private static final String table_chemical = "table_chemical";
     private static final String COL_ID = "ID";
@@ -20,12 +30,21 @@ public class Chemical_DAO extends DAO<Chemical>  {
     private static final String COL_CLASS = "CLASS";
     private static final int NUM_COL_CLASS = 2;
 
-    public Chemical_DAO(Context context){
-        super(context);
+    public void openForWrite() {
+        db = mineral_gestion.getWritableDatabase();
+    }
+
+    public void openForRead() {
+        db = mineral_gestion.getReadableDatabase();
+    }
+
+    public void close(){ db.close(); }
+
+    public SQLiteDatabase getBdd() {
+        return db;
     }
 
     // Override methods that come from class DAO
-    @Override
     public long insert(Chemical object) {
         ContentValues content = new ContentValues();
         content.put(COL_FORMULA, object.getChemical_formula());
@@ -34,7 +53,6 @@ public class Chemical_DAO extends DAO<Chemical>  {
         return db.insert(table_chemical, null, content);
     }
 
-    @Override
     public int update(int id, Chemical object) {
         ContentValues content = new ContentValues();
         content.put(COL_FORMULA, object.getChemical_formula());
@@ -43,19 +61,16 @@ public class Chemical_DAO extends DAO<Chemical>  {
         return db.update(table_chemical, content, COL_ID + " = " + id, null );
     }
 
-    @Override
     public int remove(int id) {
         return db.delete(table_chemical, COL_ID + " = " + id, null);
     }
 
-    @Override
     public Chemical getObject(String formula) {
         Cursor c = db.query(table_chemical, new String[] {COL_ID, COL_FORMULA, COL_CLASS}, COL_FORMULA + " LIKE \"" +
                 formula + " \"", null, null, null, COL_FORMULA );
         return cursorToObject(c);
     }
 
-    @Override
     public Chemical cursorToObject(Cursor c) {
         if (c.getCount() == 0) {
             c.close();
@@ -71,7 +86,7 @@ public class Chemical_DAO extends DAO<Chemical>  {
         return chemical;
     }
 
-    @Override
+
     public ArrayList<Chemical> getAllObject() {
         Cursor c = db.query(table_chemical, new String[] {COL_ID, COL_FORMULA, COL_CLASS},
                 null, null, null, null, COL_ID);

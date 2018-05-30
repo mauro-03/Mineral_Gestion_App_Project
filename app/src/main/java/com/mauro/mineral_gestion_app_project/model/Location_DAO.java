@@ -7,10 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-public class Location_DAO extends DAO<Location> {
+public class Location_DAO  {
+
+    public static final String name = "Mineral_Gestion_DB";
+    public static final int version = 1;
 
     private SQLiteDatabase db;
-    private MineralGestion_DB_SQLite mineralGestion_db;
+    private MineralGestion_DB_SQLite mineral_gestion;
+
+    public Location_DAO(){}
+
+    public Location_DAO(Context context){
+        mineral_gestion = new MineralGestion_DB_SQLite(context, name, null, version);
+    }
 
     private static final String table_location = "table_location";
     private static final String COL_ID = "ID";
@@ -22,13 +31,23 @@ public class Location_DAO extends DAO<Location> {
     private static final String COL_COUNTRY = "COUNTRY";
     private static final int NUM_COL_COUNTRTY = 3;
 
-    public Location_DAO(Context context){
-        super(context);
+    public void openForWrite() {
+        db = mineral_gestion.getWritableDatabase();
+    }
+
+    public void openForRead() {
+        db = mineral_gestion.getReadableDatabase();
+    }
+
+    public void close(){ db.close(); }
+
+    public SQLiteDatabase getBdd() {
+        return db;
     }
 
 
     // Override methods that come from class DAO
-    @Override
+
     public long insert(Location object) {
         ContentValues content = new ContentValues();
         content.put(COL_CITY, object.getLocation_city());
@@ -38,7 +57,7 @@ public class Location_DAO extends DAO<Location> {
         return db.insert(table_location, null, content);
     }
 
-    @Override
+
     public int update(int id, Location object) {
         ContentValues content = new ContentValues();
         content.put(COL_CITY, object.getLocation_city());
@@ -48,19 +67,18 @@ public class Location_DAO extends DAO<Location> {
         return db.update(table_location, content, COL_ID + " = " + id, null);
     }
 
-    @Override
     public int remove(int id) {
         return db.delete(table_location, COL_ID + " = "  + id, null);
     }
 
-    @Override
+
     public Location getObject(String city) {
         Cursor c = db.query(table_location, new String[] {COL_ID, COL_CITY, COL_AREA,COL_COUNTRY},
                 COL_CITY + " LIKE \"" + city + " \"", null, null, null, COL_CITY);
         return cursorToObject(c);
     }
 
-    @Override
+
     public Location cursorToObject(Cursor c) {
         if (c.getCount() == 0) {
             c.close();
@@ -77,7 +95,7 @@ public class Location_DAO extends DAO<Location> {
         return location;
     }
 
-    @Override
+
     public ArrayList<Location> getAllObject() {
         Cursor c = db.query(table_location, new String[] {COL_ID, COL_CITY, COL_AREA, COL_COUNTRY},
                 null, null, null, null, COL_ID);
