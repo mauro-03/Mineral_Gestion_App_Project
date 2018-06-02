@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TabHost;
+import android.widget.Toast;
 
 import com.mauro.mineral_gestion_app_project.R;
 import com.mauro.mineral_gestion_app_project.model.User;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         usernameEntry = (EditText) findViewById(R.id.username);
         codeEntry = (EditText) findViewById(R.id.code);
 
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
         mUser_dao = new User_DAO(context);
 
         connect_button.setOnClickListener(new View.OnClickListener() {
@@ -46,11 +48,24 @@ public class MainActivity extends AppCompatActivity {
                 String username = usernameEntry.getText().toString();
                 String code = codeEntry.getText().toString();
 
-                //User user = mUser_dao.getObject(username);
+                mUser_dao.openForRead();
+                ArrayList<User> listUserConnection = mUser_dao.getUserConnection(username, code);
 
-                if(code.equals("0000") && username.equals("mau")){
-                    Intent homeActivity = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(homeActivity);
+                if( listUserConnection == null ){
+                    int duration = Toast.LENGTH_LONG;
+                    String textError = "Couple user/pincode not found !";
+                    Toast userError =  Toast.makeText(context, textError , duration);
+                    userError.show();
+                    usernameEntry.setText("");
+                    codeEntry.setText("");
+
+                }else {
+                    if(code.equals(listUserConnection.get(0).getUser_pinCode())
+                            && username.equals(listUserConnection.get(0).getUser_username())){
+                        Intent homeActivity = new Intent(MainActivity.this, HomeActivity.class);
+                        homeActivity.putExtra("idUser", listUserConnection.get(0).getUser_id());
+                        startActivity(homeActivity);
+                    }
                 }
             }
         });

@@ -30,6 +30,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".controller.ListMineralsActivity" />
+        <activity android:name=".controller.MineralDetailActivity" />
+        <activity android:name=".controller.NewMineralActivity"></activity>
     </application>
 
 </manifest>

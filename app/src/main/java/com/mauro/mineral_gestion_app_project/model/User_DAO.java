@@ -140,4 +140,33 @@ public class User_DAO  {
 
         return list_user;
     }
+
+    public ArrayList<User> getUserConnection(String username, String pinCode) {
+        Cursor c = db.query(table_user, new String[] { COL_ID, COL_USERNAME, COL_PINCODE, COL_NAME,
+                        COL_SURNAME, COL_EMAIL, COL_PHONE}, null, null, null,
+                null, COL_ID );
+        if (c.getCount() == 0){
+            c.close();
+            return null;
+        }
+        ArrayList<User> list_user = new ArrayList<>();
+        c.moveToFirst();
+        do{
+            if(username.equals(c.getString(NUM_COL_USERNAME))
+                    && pinCode.equals(c.getString(NUM_COL_PINCODE))) {
+                User user = new User();
+                user.setUser_id(c.getInt(NUM_COL_ID));
+                user.setUser_username(c.getString(NUM_COL_USERNAME));
+                user.setUser_pinCode(c.getString(NUM_COL_PINCODE));
+                user.setUser_name(c.getString(NUM_COL_NAME));
+                user.setUser_surname(c.getString(NUM_COL_SURNAME));
+                user.setUser_email(c.getString(NUM_COL_EMAIL));
+                user.setUser_phone(c.getString(NUM_COL_PHONE));
+                list_user.add(user);
+            }
+        }while(c.moveToNext());
+        c.close();
+
+        return list_user;
+    }
 }

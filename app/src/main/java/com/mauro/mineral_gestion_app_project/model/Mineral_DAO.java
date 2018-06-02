@@ -164,7 +164,7 @@ public class Mineral_DAO  {
     }
 
 
-    public ArrayList<Mineral> getAllObject() {
+    public ArrayList<Mineral> getAllObject(String idFKUser) {
         Cursor c = db.query(table_mineral, new String[] {COL_ID, COL_NAME, COL_SYNONYM,  COL_MINASS,
                         COL_SYSTCRIST, COL_COLOR, COL_GLOW, COL_ASPECT, COL_CLIVAGE, COL_HARDNESS, COL_DENSITY,
                         COL_DATE, COL_PRICE, COL_LOCATION, COL_FK_user, COL_FK_location, COL_FK_chemical},
@@ -176,24 +176,26 @@ public class Mineral_DAO  {
         }
         ArrayList<Mineral> listMineral = new ArrayList<>();
         do{
-            Mineral mineral = new Mineral();
-            mineral.setMineral_id(c.getInt(NUM_COL_ID));
-            mineral.setMineral_name(c.getString(NUM_COL_NAME));
-            mineral.setMineral_synonyme(c.getString(NUM_COL_SYNPNYM));
-            mineral.setMineral_minAss(c.getString(NUM_COL_MINASS));
-            mineral.setMineral_systCrist(c.getString(NUM_COL_SYSTCRIST));
-            mineral.setMineral_color(c.getString(NUM_COL_COLOR));
-            mineral.setMineral_glow(c.getString(NUM_COL_GLOW));
-            mineral.setMineral_aspect(c.getString(NUM_COL_ASPECT));
-            mineral.setMineral_clivage(c.getString(NUM_COL_CLIVAGE));
-            mineral.setMineral_hardness(c.getFloat(NUM_COL_HARDNESS));
-            mineral.setMineral_density(c.getFloat(NUM_COL_DENSITY));
-            // mineral.setMineral_acquisitionDate(c.);
-            mineral.setMineral_price(c.getFloat(NUM_COL_PRICE));
-            mineral.setMineral_location(c.getString(NUM_COL_LOCATION));
-            mineral.setForeignKey_user(c.getInt(NUM_COL_FK_USER));
-            mineral.setForeignKey_location(c.getInt(NUM_COL_FK_LOCATION));
-            mineral.setForeignKey_chemical(c.getInt(NUM_COL_FK_CHEMICAL));
+            if(idFKUser.equals(c.getString(NUM_COL_FK_USER))) {
+                Mineral mineral = new Mineral();
+                mineral.setMineral_id(c.getInt(NUM_COL_ID));
+                mineral.setMineral_name(c.getString(NUM_COL_NAME));
+                mineral.setMineral_synonyme(c.getString(NUM_COL_SYNPNYM));
+                mineral.setMineral_minAss(c.getString(NUM_COL_MINASS));
+                mineral.setMineral_systCrist(c.getString(NUM_COL_SYSTCRIST));
+                mineral.setMineral_color(c.getString(NUM_COL_COLOR));
+                mineral.setMineral_glow(c.getString(NUM_COL_GLOW));
+                mineral.setMineral_aspect(c.getString(NUM_COL_ASPECT));
+                mineral.setMineral_clivage(c.getString(NUM_COL_CLIVAGE));
+                mineral.setMineral_hardness(c.getFloat(NUM_COL_HARDNESS));
+                mineral.setMineral_density(c.getFloat(NUM_COL_DENSITY));
+                // mineral.setMineral_acquisitionDate(c.);
+                mineral.setMineral_price(c.getFloat(NUM_COL_PRICE));
+                mineral.setMineral_location(c.getString(NUM_COL_LOCATION));
+                mineral.setForeignKey_user(c.getInt(NUM_COL_FK_USER));
+                mineral.setForeignKey_location(c.getInt(NUM_COL_FK_LOCATION));
+                mineral.setForeignKey_chemical(c.getInt(NUM_COL_FK_CHEMICAL));
+            }
         }while(c.moveToNext());
         c.close();
 
