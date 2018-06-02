@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Intent intent = getIntent();
-        String idUser = intent.getStringExtra("idUser");
+        final String idUser = intent.getStringExtra("idUser");
 
         btnSeeAllMinerals = (Button)findViewById(R.id.button_allMinerals);
         btnAddMineral = (Button)findViewById(R.id.button_addMineral);
@@ -42,13 +42,18 @@ public class HomeActivity extends AppCompatActivity {
         btnSeeAllMinerals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent seeAllMineralIntent = new Intent(HomeActivity.this, ListMineralsActivity.class);
+                seeAllMineralIntent.putExtra("idUser", idUser);
+                startActivity(seeAllMineralIntent);
             }
         });
 
         btnAddMineral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent newMineralIntent = new Intent(HomeActivity.this, NewMineralActivity.class);
+                newMineralIntent.putExtra("idUser", idUser);
+                startActivity(newMineralIntent);
 
             }
         });
