@@ -18,8 +18,6 @@ import java.util.ArrayList;
 
 
 public class HomeActivity extends AppCompatActivity {
-    // TEST, A SUPP !!
-    TextView test;
 
     //Components
     Button btnSeeAllMinerals;
@@ -66,18 +64,5 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-
-        // TEST, A SUPP !!!
-
-        test = (TextView)findViewById(R.id.textView4);
-
-        Context context = getApplicationContext();
-        User_DAO user_dao = new User_DAO(context);
-        user_dao.openForRead();
-        ArrayList<User> listUser = user_dao.getAllObject();
-        User user = listUser.get(0);
-        String textetest = user.getUser_surname();
-        test.setText(textetest);
     }
 }

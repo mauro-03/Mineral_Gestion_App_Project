@@ -73,8 +73,12 @@ public class Location_DAO  {
 
 
     public Location getObject(String city) {
-        Cursor c = db.query(table_location, new String[] {COL_ID, COL_CITY, COL_AREA,COL_COUNTRY},
-                COL_CITY + " LIKE \"" + city + " \"", null, null, null, COL_CITY);
+        //Cursor c = db.query(table_location, new String[] {COL_ID, COL_CITY, COL_AREA,COL_COUNTRY},
+        //        COL_CITY + " LIKE \"" + city + " \"", null, null, null, COL_CITY);
+
+        Cursor c = db.rawQuery( "SELECT * FROM " + table_location + " WHERE " +
+                COL_CITY + "=?", new String[] { city } );
+
         return cursorToObject(c);
     }
 

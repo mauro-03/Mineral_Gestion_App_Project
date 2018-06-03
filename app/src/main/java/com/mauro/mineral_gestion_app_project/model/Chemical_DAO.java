@@ -45,12 +45,23 @@ public class Chemical_DAO   {
     }
 
     // Override methods that come from class DAO
-    public long insert(Chemical object) {
+
+    // INSERT done with execSQL method in order to insertonly if the element does not exists;
+    // if does not work, try with getAll method in the controller class
+    public void insert(Chemical object) {
+        /*
         ContentValues content = new ContentValues();
         content.put(COL_FORMULA, object.getChemical_formula());
         content.put(COL_CLASS, object.getChemical_class());
+        */
 
-        return db.insert(table_chemical, null, content);
+        String insertChemichalQuery = "INSERT INTO " + table_chemical + "(" + COL_FORMULA
+                + "," + COL_CLASS + ") SELECT \'" + object.getChemical_formula() + "\' , " +
+                object.getChemical_class() + " WHERE NOT EXISTS (SELECT 1 FROM " + table_chemical +
+                " WHERE " + COL_FORMULA + " = \'" + object.getChemical_formula() + "\' AND " +
+                COL_CLASS + " = " + object.getChemical_class() + " );";
+
+        db.execSQL(insertChemichalQuery);
     }
 
     public int update(int id, Chemical object) {
@@ -66,8 +77,12 @@ public class Chemical_DAO   {
     }
 
     public Chemical getObject(String formula) {
-        Cursor c = db.query(table_chemical, new String[] {COL_ID, COL_FORMULA, COL_CLASS}, COL_FORMULA + " LIKE \"" +
-                formula + " \"", null, null, null, COL_FORMULA );
+        //Cursor c = db.query(table_chemical, new String[] {COL_ID, COL_FORMULA, COL_CLASS}, COL_FORMULA + " LIKE \"" +
+        //        formula + " \"", null, null, null, COL_FORMULA );
+
+        Cursor c = db.rawQuery( "SELECT * FROM " + table_chemical + " WHERE " +
+                COL_FORMULA + "=?", new String[] { formula } );
+
         return cursorToObject(c);
     }
 

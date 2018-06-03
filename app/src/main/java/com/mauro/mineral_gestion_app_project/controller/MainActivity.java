@@ -2,6 +2,7 @@ package com.mauro.mineral_gestion_app_project.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +50,25 @@ public class MainActivity extends AppCompatActivity {
                 String code = codeEntry.getText().toString();
 
                 mUser_dao.openForRead();
+                User findUser = mUser_dao.getObject(username);
+
+                if(findUser != null){
+                    if(findUser.getUser_username().equals(username)
+                            && findUser.getUser_pinCode().equals(code)){
+                        Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+                        String idUser = Integer.toString(findUser.getUser_id());
+                        homeIntent.putExtra("idUser", idUser);
+                        startActivity(homeIntent);
+                    }
+                }else{
+                    String txt = " ca marche ap frere ";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(context, txt, duration);
+                    toast.show();
+
+                }
+
+                /*
                 ArrayList<User> listUserConnection = mUser_dao.getUserConnection(username, code);
 
                 if( listUserConnection == null ){
@@ -66,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         homeActivity.putExtra("idUser", listUserConnection.get(0).getUser_id());
                         startActivity(homeActivity);
                     }
-                }
+                }*/
             }
         });
 

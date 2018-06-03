@@ -158,7 +158,7 @@
             android:layout_marginLeft="10dp"
             android:ems="10"
             android:hint="Chemical Formula"
-            android:inputType="numberDecimal" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editTextChemicalClass"
@@ -187,7 +187,7 @@
             android:layout_marginLeft="10dp"
             android:ems="10"
             android:hint="City"
-            android:inputType="numberDecimal" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editTextArea"
@@ -197,7 +197,7 @@
             android:layout_marginLeft="10dp"
             android:ems="10"
             android:hint="Area"
-            android:inputType="numberDecimal" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editTextCountry"
@@ -205,9 +205,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginLeft="10dp"
+            android:inputType="textPersonName"
             android:ems="10"
             android:hint="Country"
-            android:inputType="numberDecimal" />
+             />
 
         <Button
             android:id="@+id/buttonAdd"

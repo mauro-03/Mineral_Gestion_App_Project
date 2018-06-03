@@ -126,10 +126,14 @@ public class Mineral_DAO  {
 
 
     public Mineral getObject(String name) {
-        Cursor c = db.query(table_mineral, new String[] {COL_ID, COL_NAME, COL_SYNONYM,  COL_MINASS,
-                COL_SYSTCRIST, COL_COLOR, COL_GLOW, COL_ASPECT, COL_CLIVAGE, COL_HARDNESS, COL_DENSITY,
-                COL_DATE, COL_PRICE, COL_LOCATION, COL_FK_user, COL_FK_location, COL_FK_chemical},
-                COL_NAME + " LIKE \"" + name + " \"", null, null, null, COL_NAME );
+        //Cursor c = db.query(table_mineral, new String[] {COL_ID, COL_NAME, COL_SYNONYM,  COL_MINASS,
+        //        COL_SYSTCRIST, COL_COLOR, COL_GLOW, COL_ASPECT, COL_CLIVAGE, COL_HARDNESS, COL_DENSITY,
+        //        COL_DATE, COL_PRICE, COL_LOCATION, COL_FK_user, COL_FK_location, COL_FK_chemical},
+        //        COL_NAME + " LIKE \"" + name + " \"", null, null, null, COL_NAME );
+
+        Cursor c = db.rawQuery( "SELECT * FROM " + table_mineral + " WHERE " +
+                COL_NAME + "=?", new String[] { name } );
+
         return cursorToObject(c);
     }
 

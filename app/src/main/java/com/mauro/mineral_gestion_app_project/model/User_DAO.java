@@ -89,9 +89,14 @@ public class User_DAO  {
 
 
     public User getObject(String username) {
-        Cursor c = db.query(table_user, new String[] {COL_ID, COL_USERNAME, COL_PINCODE,  COL_NAME,
-                COL_SURNAME, COL_EMAIL, COL_PHONE}, COL_USERNAME + " LIKE \"" +
-                username + " \"", null, null, null, COL_NAME );
+        //Cursor c = db.query(table_user, new String[] {COL_ID, COL_USERNAME, COL_PINCODE,  COL_NAME,
+        //        COL_SURNAME, COL_EMAIL, COL_PHONE}, COL_USERNAME + " = ? ", new String[] {username}, null, null, COL_ID );
+
+        //alternative trouvée sur stack overflow car fonctionnait pas
+
+        Cursor c = db.rawQuery( "SELECT * FROM " + table_user + " WHERE " +
+                COL_USERNAME + " = ? ", new String[] { username } );
+
         return cursorToObject(c);
     }
 
