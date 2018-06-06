@@ -1,6 +1,10 @@
 package com.mauro.mineral_gestion_app_project.controller;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -43,16 +47,15 @@ public class MineralDetailActivity extends AppCompatActivity {
         Button sendButton = (Button) findViewById(R.id.sendButton);
 
 
-        Bundle bundle= getIntent().getExtras();
-        if(bundle != null){
-            id = (int) bundle.get("ID");
-        }
-        else{
-            id = 0;
-        }
+        try{
 
-
-        //try{
+            Bundle bundle= getIntent().getExtras();
+            if(bundle != null){
+                id = (int) bundle.get("ID");
+            }
+            else{
+                id = 0;
+            }
 
             final Context context = getApplicationContext();
             mMineral_dao = new Mineral_DAO(context);
@@ -80,17 +83,18 @@ public class MineralDetailActivity extends AppCompatActivity {
             hardnessView.setText(setHardness);
             densityView.setText(setDensity);
             priceView.setText(setPrice);
-        //}
-        //catch(Exception e){
+        }
+        catch(Exception e){
             //Toast.makeText(MineralDetailActivity.this, e.toString(),Toast.LENGTH_LONG).show();
-        //}
+        }
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try{
-                    String message = "Informations" + setName + setSystCrist + setColor + setGlow + setAspect + setClivage + setHardness + setDensity + setPrice;
+                    //String message = "Informations" + setName + setSystCrist + setColor + setGlow + setAspect + setClivage + setHardness + setDensity + setPrice;
+                    String message = "Test";
                     sms(message);
                 }
                 catch(Exception e){
@@ -104,6 +108,32 @@ public class MineralDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(MineralDetailActivity.this,
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MineralDetailActivity.this,
+                    Manifest.permission.SEND_SMS)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(MineralDetailActivity.this,
+                        new String[]{Manifest.permission.SEND_SMS},
+                        0);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            // Permission has already been granted
+        }
 
 
     }
