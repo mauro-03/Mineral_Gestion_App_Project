@@ -133,6 +133,14 @@ public class Mineral_DAO  {
         return cursorToObject(c);
     }
 
+    public Mineral getId(int id) {
+
+        Cursor c = db.rawQuery( "SELECT * FROM " + table_mineral + " WHERE " +
+                COL_ID + "=?", new String[] {String.valueOf(id)} );
+
+        return cursorToObject(c);
+    }
+
 
     public Mineral cursorToObject(Cursor c) {
         if (c.getCount() == 0) {
