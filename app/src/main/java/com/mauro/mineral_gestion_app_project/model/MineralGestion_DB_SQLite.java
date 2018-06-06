@@ -70,7 +70,6 @@ public class MineralGestion_DB_SQLite extends SQLiteOpenHelper{
     private static final String COL_CLIVAGE_mineral = "CLIVAGE";
     private static final String COL_HARDNESS_mineral = "HARDNESS";
     private static final String COL_DENSITY_mineral = "DENSITY";
-    private static final String COL_DATE_mineral = "DATE";
     private static final String COL_PRICE_mineral = "PRICE";
     private static final String COL_LOCATION_mineral = "LOCATION";
     private static final String COL_FK_user = "FK_USER";
@@ -89,7 +88,6 @@ public class MineralGestion_DB_SQLite extends SQLiteOpenHelper{
             + COL_CLIVAGE_mineral + " TEXT, "
             + COL_HARDNESS_mineral + " REAL, "
             + COL_DENSITY_mineral + " REAL, "
-            + COL_DATE_mineral + " NUMERIC, "
             + COL_PRICE_mineral + " REAL, "
             + COL_LOCATION_mineral + " TEXT, "
             + COL_FK_user + " INTEGER,"

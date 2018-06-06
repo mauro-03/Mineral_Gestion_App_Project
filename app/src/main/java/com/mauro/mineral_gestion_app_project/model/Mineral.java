@@ -19,7 +19,6 @@ public class Mineral {
     private String mineral_clivage;
     private float mineral_hardness;
     private float mineral_density;
-    private Date mineral_acquisitionDate;
     private float mineral_price;
     private String mineral_location;
     private int foreignKey_user;
@@ -116,13 +115,6 @@ public class Mineral {
         this.mineral_density = mineral_density;
     }
 
-    public Date getMineral_acquisitionDate() {
-        return mineral_acquisitionDate;
-    }
-
-    public void setMineral_acquisitionDate(Date mineral_acquisitionDate) {
-        this.mineral_acquisitionDate = mineral_acquisitionDate;
-    }
 
     public float getMineral_price() {
         return mineral_price;

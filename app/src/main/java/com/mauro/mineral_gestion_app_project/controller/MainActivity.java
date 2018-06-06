@@ -68,25 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-                /*
-                ArrayList<User> listUserConnection = mUser_dao.getUserConnection(username, code);
-
-                if( listUserConnection == null ){
-                    int duration = Toast.LENGTH_LONG;
-                    String textError = "Couple user/pincode not found !";
-                    Toast userError =  Toast.makeText(context, textError , duration);
-                    userError.show();
-                    usernameEntry.setText("");
-                    codeEntry.setText("");
-
-                }else {
-                    if(code.equals(listUserConnection.get(0).getUser_pinCode())
-                            && username.equals(listUserConnection.get(0).getUser_username())){
-                        Intent homeActivity = new Intent(MainActivity.this, HomeActivity.class);
-                        homeActivity.putExtra("idUser", listUserConnection.get(0).getUser_id());
-                        startActivity(homeActivity);
-                    }
-                }*/
             }
         });
 
