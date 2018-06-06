@@ -24,6 +24,7 @@ public class MineralDetailActivity extends AppCompatActivity {
     Mineral_DAO mMineral_dao;
 
     int id;
+    String num;
 
 
     @Override
@@ -83,6 +84,7 @@ public class MineralDetailActivity extends AppCompatActivity {
             hardnessView.setText(setHardness);
             densityView.setText(setDensity);
             priceView.setText(setPrice);
+
         }
         catch(Exception e){
             //Toast.makeText(MineralDetailActivity.this, e.toString(),Toast.LENGTH_LONG).show();
@@ -93,6 +95,7 @@ public class MineralDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 try{
+                    num = phone_num.getText().toString();
                     //String message = "Informations" + setName + setSystCrist + setColor + setGlow + setAspect + setClivage + setHardness + setDensity + setPrice;
                     String message = "Test";
                     sms(message);
@@ -103,8 +106,8 @@ public class MineralDetailActivity extends AppCompatActivity {
             }
 
             private void sms(String message) {
-                if(phone_num.length()>= 4){
-                    SmsManager.getDefault().sendTextMessage(String.valueOf(phone_num), null, message, null, null );
+                if(num.length()>= 4){
+                    SmsManager.getDefault().sendTextMessage(num, null, message, null, null );
                 }
             }
         });
