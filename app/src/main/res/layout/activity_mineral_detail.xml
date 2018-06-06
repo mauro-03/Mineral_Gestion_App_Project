@@ -198,7 +198,6 @@
                 android:id="@+id/sendButton"
                 android:layout_width="154dp"
                 android:layout_height="wrap_content"
-                android:layout_align="center"
                 android:layout_marginTop="25dp"
                 android:layout_centerInParent="true"
                 android:text="Send SMS" />
