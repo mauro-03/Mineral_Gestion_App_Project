@@ -50,24 +50,24 @@ public class MineralDetailActivity extends AppCompatActivity {
 
 
         String setName = " Name : " + mineral.getMineral_name();
-        /*String setSystCrist = "Syst Crist :" + mineral.getMineral_systCrist();
+        String setSystCrist = "Syst Crist :" + mineral.getMineral_systCrist();
         String setColor = "Color :" + mineral.getMineral_color();
         String setGlow = "Glow :" + mineral.getMineral_glow();
         String setAspect = "Aspect : " + mineral.getMineral_aspect();
         String setClivage = "Clivage : " + mineral.getMineral_clivage();
         String setHardness = "Hardness :" + mineral.getMineral_hardness();
         String setDensity = "Density :" + mineral.getMineral_density();
-        String setPrice = "Price :" + mineral.getMineral_price();*/
+        String setPrice = "Price :" + mineral.getMineral_price();
 
         nameView.setText(setName);
-        /*systCristView.setText(setSystCrist);
+        systCristView.setText(setSystCrist);
         colorView.setText(setColor);
         glowView.setText(setGlow);
         aspectView.setText(setAspect);
         clivageView.setText(setClivage);
         hardnessView.setText(setHardness);
         densityView.setText(setDensity);
-        priceView.setText(setPrice);*/
+        priceView.setText(setPrice);
 
 
     }
