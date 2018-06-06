@@ -3,6 +3,10 @@ package com.mauro.mineral_gestion_app_project.controller;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +39,8 @@ public class MineralDetailActivity extends AppCompatActivity {
         TextView densityView = (TextView) findViewById(R.id.textViewDensity);
         TextView priceView = (TextView) findViewById(R.id.textViewPrice);
 
+        final EditText phone_num = (EditText) findViewById(R.id.editTextPhoneNumber);
+        Button sendButton = (Button) findViewById(R.id.sendButton);
 
 
         Bundle bundle= getIntent().getExtras();
@@ -46,7 +52,7 @@ public class MineralDetailActivity extends AppCompatActivity {
         }
 
 
-        try{
+        //try{
 
             final Context context = getApplicationContext();
             mMineral_dao = new Mineral_DAO(context);
@@ -55,15 +61,15 @@ public class MineralDetailActivity extends AppCompatActivity {
             mMineral_dao.close();
 
 
-            String setName = " Name : " + mineral.getMineral_name();
-            String setSystCrist = "Syst Crist :" + mineral.getMineral_systCrist();
-            String setColor = "Color :" + mineral.getMineral_color();
-            String setGlow = "Glow :" + mineral.getMineral_glow();
-            String setAspect = "Aspect : " + mineral.getMineral_aspect();
-            String setClivage = "Clivage : " + mineral.getMineral_clivage();
-            String setHardness = "Hardness :" + mineral.getMineral_hardness();
-            String setDensity = "Density :" + mineral.getMineral_density();
-            String setPrice = "Price :" + mineral.getMineral_price();
+            final String setName = " Name : " + mineral.getMineral_name();
+            final String setSystCrist = "Syst Crist :" + mineral.getMineral_systCrist();
+            final String setColor = "Color :" + mineral.getMineral_color();
+            final String setGlow = "Glow :" + mineral.getMineral_glow();
+            final String setAspect = "Aspect : " + mineral.getMineral_aspect();
+            final String setClivage = "Clivage : " + mineral.getMineral_clivage();
+            final String setHardness = "Hardness :" + mineral.getMineral_hardness();
+            final String setDensity = "Density :" + mineral.getMineral_density();
+            final String setPrice = "Price :" + mineral.getMineral_price();
 
             nameView.setText(setName);
             systCristView.setText(setSystCrist);
@@ -74,9 +80,30 @@ public class MineralDetailActivity extends AppCompatActivity {
             hardnessView.setText(setHardness);
             densityView.setText(setDensity);
             priceView.setText(setPrice);
-        }
-        catch(Exception e){
-            Toast.makeText(MineralDetailActivity.this, e.toString(),Toast.LENGTH_LONG).show();}
+        //}
+        //catch(Exception e){
+            //Toast.makeText(MineralDetailActivity.this, e.toString(),Toast.LENGTH_LONG).show();
+        //}
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try{
+                    String message = "Informations" + setName + setSystCrist + setColor + setGlow + setAspect + setClivage + setHardness + setDensity + setPrice;
+                    sms(message);
+                }
+                catch(Exception e){
+                    Toast.makeText(MineralDetailActivity.this, e.toString(),Toast.LENGTH_LONG).show();
+                }
+            }
+
+            private void sms(String message) {
+                if(phone_num.length()>= 4){
+                    SmsManager.getDefault().sendTextMessage(String.valueOf(phone_num), null, message, null, null );
+                }
+            }
+        });
 
 
     }
