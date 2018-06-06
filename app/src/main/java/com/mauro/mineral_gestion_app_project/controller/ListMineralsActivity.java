@@ -49,6 +49,8 @@ public class ListMineralsActivity extends AppCompatActivity {
                 Intent mineralDetailIntent = new Intent(ListMineralsActivity.this, MineralDetailActivity.class);
                 mineralDetailIntent.putExtra("idMineral", id_mineralString);
                 startActivity(mineralDetailIntent);
+
+                // j'ai une erreur sur l'id que tu envoies
             }
         });
 
