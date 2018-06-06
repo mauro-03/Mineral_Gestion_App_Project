@@ -163,7 +163,7 @@ public class Mineral_DAO  {
     }
 
 
-    public ArrayList<Mineral> getAllObject(String idFKUser) {
+    public ArrayList<Mineral> getAllObject(int  idFKUser) {
         Cursor c = db.query(table_mineral, new String[] {COL_ID, COL_NAME, COL_SYNONYM,  COL_MINASS,
                         COL_SYSTCRIST, COL_COLOR, COL_GLOW, COL_ASPECT, COL_CLIVAGE, COL_HARDNESS, COL_DENSITY,
                          COL_PRICE, COL_LOCATION, COL_FK_user, COL_FK_location, COL_FK_chemical},
@@ -174,8 +174,10 @@ public class Mineral_DAO  {
             return null;
         }
         ArrayList<Mineral> listMineral = new ArrayList<>();
+        c.moveToFirst();
+
         do{
-            if(idFKUser.equals(c.getString(NUM_COL_FK_USER))) {
+            if(idFKUser == c.getInt(NUM_COL_FK_USER)) {
                 Mineral mineral = new Mineral();
                 mineral.setMineral_id(c.getInt(NUM_COL_ID));
                 mineral.setMineral_name(c.getString(NUM_COL_NAME));
@@ -193,6 +195,8 @@ public class Mineral_DAO  {
                 mineral.setForeignKey_user(c.getInt(NUM_COL_FK_USER));
                 mineral.setForeignKey_location(c.getInt(NUM_COL_FK_LOCATION));
                 mineral.setForeignKey_chemical(c.getInt(NUM_COL_FK_CHEMICAL));
+
+                listMineral.add(mineral);
             }
         }while(c.moveToNext());
         c.close();

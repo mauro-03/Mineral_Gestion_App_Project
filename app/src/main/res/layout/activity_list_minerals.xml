@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
     <ListView
-        android:id="@+id/mineralList"
+        android:id="@+id/mineralsList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

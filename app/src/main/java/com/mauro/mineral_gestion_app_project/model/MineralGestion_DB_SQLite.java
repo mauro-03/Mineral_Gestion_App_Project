@@ -82,7 +82,7 @@ public class MineralGestion_DB_SQLite extends SQLiteOpenHelper{
             + COL_SYNONYM_mineral + " TEXT, "
             + COL_MINASS_mineral + " TEXT, "
             + COL_SYSTCRIST_mineral + " TEXT, "
-            + COL_COLOR_mineral + "TEXT, "
+            + COL_COLOR_mineral + " TEXT, "
             + COL_GLOW_mineral + " TEXT, "
             + COL_ASPECT_mineral + " TEXT, "
             + COL_CLIVAGE_mineral + " TEXT, "
