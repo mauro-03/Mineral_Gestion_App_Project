@@ -2,6 +2,7 @@ package com.mauro.mineral_gestion_app_project.controller;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +12,7 @@ import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,14 +20,12 @@ import com.mauro.mineral_gestion_app_project.R;
 import com.mauro.mineral_gestion_app_project.model.Mineral;
 import com.mauro.mineral_gestion_app_project.model.Mineral_DAO;
 
-public class MineralDetailActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
-    Mineral mineral;
-    Mineral_DAO mMineral_dao;
+public class MineralDetailActivity extends AppCompatActivity {
 
     int id;
     String num;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MineralDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mineral_detail);
         setTitle("Mineral details");
 
-
+        TextView idView = (TextView)findViewById(R.id.textViewId);
         TextView nameView = (TextView) findViewById(R.id.textViewName);
         TextView systCristView = (TextView) findViewById(R.id.textViewSystCrist);
         TextView colorView = (TextView) findViewById(R.id.textViewColor);
@@ -48,47 +48,39 @@ public class MineralDetailActivity extends AppCompatActivity {
         Button sendButton = (Button) findViewById(R.id.sendButton);
 
 
-        try{
 
-            Bundle bundle= getIntent().getExtras();
-            if(bundle != null){
-                id = (int) bundle.get("ID");
-            }
-            else{
-                id = 0;
-            }
+        Intent listIntent = getIntent();
+        final String idMineral = listIntent.getStringExtra("idMineral");
+        int id = Integer.parseInt(idMineral);
 
-            final Context context = getApplicationContext();
-            mMineral_dao = new Mineral_DAO(context);
-            mMineral_dao.openForRead();
-            mineral = mMineral_dao.getId(id);
-            mMineral_dao.close();
+        Context context = getApplicationContext();
+        Mineral_DAO mineral_dao = new Mineral_DAO(context);
+        mineral_dao.openForWrite();
+        Mineral mineral = mineral_dao.getId(idMineral);
+        mineral_dao.close();
 
+        final String setId = " Descrisption of mineral ID : " + idMineral;
+        final String setName = "\n Name : " + mineral.getMineral_name();
+        final String setSystCrist = "\n Syst Crist : " + mineral.getMineral_systCrist();
+        final String setColor = "\n Color : " + mineral.getMineral_color();
+        final String setGlow = "\n Glow : " + mineral.getMineral_glow();
+        final String setAspect = "\n Aspect : " + mineral.getMineral_aspect();
+        final String setClivage = "\n Clivage : " + mineral.getMineral_clivage();
+        final String setHardness = "\n Hardness : " + mineral.getMineral_hardness();
+        final String setDensity = "\n Density : " + mineral.getMineral_density();
+        final String setPrice = "\n Price : " + mineral.getMineral_price();
 
-            final String setName = " Name : " + mineral.getMineral_name();
-            final String setSystCrist = "Syst Crist :" + mineral.getMineral_systCrist();
-            final String setColor = "Color :" + mineral.getMineral_color();
-            final String setGlow = "Glow :" + mineral.getMineral_glow();
-            final String setAspect = "Aspect : " + mineral.getMineral_aspect();
-            final String setClivage = "Clivage : " + mineral.getMineral_clivage();
-            final String setHardness = "Hardness :" + mineral.getMineral_hardness();
-            final String setDensity = "Density :" + mineral.getMineral_density();
-            final String setPrice = "Price :" + mineral.getMineral_price();
+        idView.setText(setId);
+        nameView.setText(setName);
+        systCristView.setText(setSystCrist);
+        colorView.setText(setColor);
+        glowView.setText(setGlow);
+        aspectView.setText(setAspect);
+        clivageView.setText(setClivage);
+        hardnessView.setText(setHardness);
+        densityView.setText(setDensity);
+        priceView.setText(setPrice);
 
-            nameView.setText(setName);
-            systCristView.setText(setSystCrist);
-            colorView.setText(setColor);
-            glowView.setText(setGlow);
-            aspectView.setText(setAspect);
-            clivageView.setText(setClivage);
-            hardnessView.setText(setHardness);
-            densityView.setText(setDensity);
-            priceView.setText(setPrice);
-
-        }
-        catch(Exception e){
-            //Toast.makeText(MineralDetailActivity.this, e.toString(),Toast.LENGTH_LONG).show();
-        }
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,9 +88,24 @@ public class MineralDetailActivity extends AppCompatActivity {
 
                 try{
                     num = phone_num.getText().toString();
-                    //String message = "Informations" + setName + setSystCrist + setColor + setGlow + setAspect + setClivage + setHardness + setDensity + setPrice;
-                    String message = "Test";
-                    sms(message);
+                    String message = "Informations mineral ID : " + idMineral
+                            + setName
+                            + setSystCrist
+                            + setColor
+                            + setGlow
+                            + setAspect
+                            + setClivage
+                            + setHardness
+                            + setDensity
+                            + setPrice;
+
+
+                    // Allow to send messages longer than 160 characters ( max length previous method )
+                    SmsManager smsManager = SmsManager.getDefault();
+                    ArrayList<String> parts = smsManager.divideMessage(message);
+                    smsManager.sendMultipartTextMessage(num, null, parts,
+                            null, null);
+                    //sms(message);
                 }
                 catch(Exception e){
                     Toast.makeText(MineralDetailActivity.this, e.toString(),Toast.LENGTH_LONG).show();

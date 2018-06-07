@@ -36,7 +36,14 @@ public class ListMineralsActivity extends AppCompatActivity {
         final ArrayList<Mineral> minerals = mineral_dao.getAllObject(fk_userInt);
         mineral_dao.close();
 
-        ArrayAdapter<Mineral> adapter = new ArrayAdapter<Mineral>(this, android.R.layout.simple_list_item_1, minerals);
+        //Creating an array with id an name to display in the listView
+        ArrayList<String> basicsMinerals = new ArrayList<>();
+        for (int i = 0; i<minerals.size(); i++){
+            String text = " ID : " + minerals.get(i).getMineral_id() + "      Name : " + minerals.get(i).getMineral_name();
+            basicsMinerals.add(text);
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, basicsMinerals);
         listMinerals.setAdapter(adapter);
 
         listMinerals.setOnItemClickListener(new AdapterView.OnItemClickListener() {

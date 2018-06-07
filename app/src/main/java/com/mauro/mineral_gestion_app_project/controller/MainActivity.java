@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(homeIntent);
                     }
                 }else{
-                    String txt = " ca marche ap frere ";
+                    String txt = "username/pinCode incorrects";
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(context, txt, duration);
                     toast.show();

@@ -128,15 +128,15 @@ public class Mineral_DAO  {
         //        COL_NAME + " LIKE \"" + name + " \"", null, null, null, COL_NAME );
 
         Cursor c = db.rawQuery( "SELECT * FROM " + table_mineral + " WHERE " +
-                COL_NAME + "=?", new String[] { name } );
+                COL_NAME + " = ? ", new String[] { name } );
 
         return cursorToObject(c);
     }
 
-    public Mineral getId(int id) {
+    public Mineral getId(String id) {
 
         Cursor c = db.rawQuery( "SELECT * FROM " + table_mineral + " WHERE " +
-                COL_ID + "=?", new String[] {String.valueOf(id)} );
+                COL_ID + " = ? ", new String[] {String.valueOf(id)} );
 
         return cursorToObject(c);
     }
