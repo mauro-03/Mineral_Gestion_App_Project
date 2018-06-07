@@ -11,30 +11,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.RegisterActivity">
+        <activity android:name=".controller.RegisterActivity" android:label="Register">
             <intent-filter>
                 <action android:name="com.example.mauro.ex_intgr_mameli_mauro.RegisterActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.MainActivity">
+        <activity android:name=".controller.MainActivity" android:label="Connection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.HomeActivity">
+        <activity android:name=".controller.HomeActivity" android:label="Home">
             <intent-filter>
                 <action android:name="com.example.mauro.ex_intgr_mameli_mauro.HomeActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.ListMineralsActivity" />
-        <activity android:name=".controller.MineralDetailActivity" />
-        <activity android:name=".controller.NewMineralActivity"></activity>
+        <activity android:name=".controller.ListMineralsActivity" android:label="List Minerals"/>
+        <activity android:name=".controller.MineralDetailActivity" android:label="Detail Mineral" />
+        <activity android:name=".controller.NewMineralActivity" android:label="New Mineral"></activity>
     </application>
 
 </manifest>

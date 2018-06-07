@@ -59,7 +59,7 @@ public class MineralDetailActivity extends AppCompatActivity {
         Mineral mineral = mineral_dao.getId(idMineral);
         mineral_dao.close();
 
-        final String setId = " Descrisption of mineral ID : " + idMineral;
+        final String setId = " Description of mineral ID : " + idMineral;
         final String setName = "\n Name : " + mineral.getMineral_name();
         final String setSystCrist = "\n Syst Crist : " + mineral.getMineral_systCrist();
         final String setColor = "\n Color : " + mineral.getMineral_color();
