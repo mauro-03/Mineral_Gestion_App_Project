@@ -34,7 +34,7 @@
         android:layout_below="@+id/textView"
         android:layout_marginTop="29dp"
         android:ems="10"
-        android:hint="ex:Jean-René"
+        android:hint="ex: mau"
         android:text="mau"
         android:inputType="text" />
 
@@ -68,16 +68,16 @@
 
     <Button
         android:id="@+id/connect_button"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="131dp"
-        android:text="CONNEXION" />
+        android:text="CONNECTION" />
 
     <Button
         android:id="@+id/register_button"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

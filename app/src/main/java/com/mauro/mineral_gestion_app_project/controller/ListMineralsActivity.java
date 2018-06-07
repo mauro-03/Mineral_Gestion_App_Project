@@ -25,7 +25,7 @@ public class ListMineralsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_minerals);
 
         Intent homeIntent = getIntent();
-        String fk_user = homeIntent.getStringExtra("idUser");
+        final String fk_user = homeIntent.getStringExtra("idUser");
         int fk_userInt = Integer.parseInt(fk_user);
 
         listMinerals = (ListView)findViewById(R.id.mineralsList);
@@ -39,7 +39,8 @@ public class ListMineralsActivity extends AppCompatActivity {
         //Creating an array with id an name to display in the listView
         ArrayList<String> basicsMinerals = new ArrayList<>();
         for (int i = 0; i<minerals.size(); i++){
-            String text = " ID : " + minerals.get(i).getMineral_id() + "      Name : " + minerals.get(i).getMineral_name();
+            String text = " ID : " + minerals.get(i).getMineral_id() + "    Name : " + minerals.get(i).getMineral_name()
+                    + "    Syst Crist : " + minerals.get(i).getMineral_systCrist();
             basicsMinerals.add(text);
         }
 
@@ -55,6 +56,7 @@ public class ListMineralsActivity extends AppCompatActivity {
 
                 Intent mineralDetailIntent = new Intent(ListMineralsActivity.this, MineralDetailActivity.class);
                 mineralDetailIntent.putExtra("idMineral", id_mineralString);
+                mineralDetailIntent.putExtra("idUser", fk_user);
                 startActivity(mineralDetailIntent);
 
                 // j'ai une erreur sur l'id que tu envoies

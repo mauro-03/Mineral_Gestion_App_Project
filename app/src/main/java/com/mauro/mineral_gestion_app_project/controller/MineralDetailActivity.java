@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class MineralDetailActivity extends AppCompatActivity {
 
-    int id;
+
     String num;
 
     @Override
@@ -51,12 +51,13 @@ public class MineralDetailActivity extends AppCompatActivity {
 
         Intent listIntent = getIntent();
         final String idMineral = listIntent.getStringExtra("idMineral");
+
         int id = Integer.parseInt(idMineral);
 
         Context context = getApplicationContext();
         Mineral_DAO mineral_dao = new Mineral_DAO(context);
         mineral_dao.openForWrite();
-        Mineral mineral = mineral_dao.getId(idMineral);
+        final Mineral mineral = mineral_dao.getId(idMineral);
         mineral_dao.close();
 
         final String setId = " Description of mineral ID : " + idMineral;
@@ -106,6 +107,8 @@ public class MineralDetailActivity extends AppCompatActivity {
                     smsManager.sendMultipartTextMessage(num, null, parts,
                             null, null);
                     //sms(message);
+                    Intent listMineralsIntent = new Intent(MineralDetailActivity.this, ListMineralsActivity.class);
+                    listMineralsIntent.putExtra("idUser", mineral.getForeignKey_user());
                 }
                 catch(Exception e){
                     Toast.makeText(MineralDetailActivity.this, e.toString(),Toast.LENGTH_LONG).show();
