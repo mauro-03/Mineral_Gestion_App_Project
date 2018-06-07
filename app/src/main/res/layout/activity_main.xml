@@ -35,7 +35,6 @@
         android:layout_marginTop="29dp"
         android:ems="10"
         android:hint="ex: mau"
-        android:text="mau"
         android:inputType="text" />
 
     <TextView
@@ -63,7 +62,6 @@
         android:layout_marginTop="34dp"
         android:ems="10"
         android:hint="ex:0000"
-        android:text="0000"
         android:inputType="numberPassword" />
 
     <Button

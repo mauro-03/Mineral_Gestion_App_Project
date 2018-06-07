@@ -40,7 +40,7 @@ public class ListMineralsActivity extends AppCompatActivity {
         ArrayList<String> basicsMinerals = new ArrayList<>();
         for (int i = 0; i<minerals.size(); i++){
             String text = " ID : " + minerals.get(i).getMineral_id() + "    Name : " + minerals.get(i).getMineral_name()
-                    + "    Syst Crist : " + minerals.get(i).getMineral_systCrist();
+                    + "    Color : " + minerals.get(i).getMineral_color();
             basicsMinerals.add(text);
         }
 
