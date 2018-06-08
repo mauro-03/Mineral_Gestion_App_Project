@@ -27,7 +27,7 @@
         android:layout_height="23dp"
         android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
-        android:text="Complete your inscription please"
+        android:text="Complete your registration please"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
