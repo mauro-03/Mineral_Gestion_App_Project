@@ -59,9 +59,14 @@ public class MainActivity extends AppCompatActivity {
                         String idUser = Integer.toString(findUser.getUser_id());
                         homeIntent.putExtra("idUser", idUser);
                         startActivity(homeIntent);
+                    }else{
+                        String txt = "pinCode not correct";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, txt, duration);
+                        toast.show();
                     }
                 }else{
-                    String txt = "username/pinCode incorrects";
+                    String txt = "username not found";
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(context, txt, duration);
                     toast.show();
