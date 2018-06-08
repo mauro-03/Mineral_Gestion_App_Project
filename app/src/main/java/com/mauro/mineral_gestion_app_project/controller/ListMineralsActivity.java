@@ -59,7 +59,7 @@ public class ListMineralsActivity extends AppCompatActivity {
                 mineralDetailIntent.putExtra("idUser", fk_user);
                 startActivity(mineralDetailIntent);
 
-                
+
             }
         });
 
