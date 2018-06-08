@@ -109,6 +109,7 @@ public class MineralDetailActivity extends AppCompatActivity {
                     //sms(message);
                     Intent listMineralsIntent = new Intent(MineralDetailActivity.this, ListMineralsActivity.class);
                     listMineralsIntent.putExtra("idUser", mineral.getForeignKey_user());
+                    startActivity(listMineralsIntent);
                 }
                 catch(Exception e){
                     Toast.makeText(MineralDetailActivity.this, e.toString(),Toast.LENGTH_LONG).show();
